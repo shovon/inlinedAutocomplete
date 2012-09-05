@@ -1,0 +1,27 @@
+.ui-menu-item span {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.ui-menu-item a .image,
+.ui-menu-item a .content {
+  float: left;
+  clear: right;
+}
+
+.ui-menu-item a .image {
+  width: 37px;
+  margin-right: 16px;
+}
+
+.ui-menu-item p {
+  padding: 0;
+  margin: 0;
+}
+
+.ui-menu-item img {
+  padding-right: 10px;
+  width: 37px;
+  height: 37px;
+}

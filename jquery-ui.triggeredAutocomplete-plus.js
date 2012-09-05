@@ -76,11 +76,21 @@
 		// If there is an 'img' then show it beside the label.
 
 		_renderItem:  function( ul, item ) {
-			if(item.img != undefined) {
+			if (item.img != undefined) {
 				return $( "<li></li>" )
 					.data( "item.autocomplete", item )
-					.append( "<a>" + "<img src='" + item.img + "' /><span>"+item.label+"</span></a>" )
-					.appendTo( ul );
+					.append(
+						"<a>" +
+							"<span class='image'>" +
+								"<img alt='Avatar' src='" + item.img + "'>"+
+							"</span>" +
+							"<span class='content'>" +
+								"<p>" + item.label + "</p>" +
+								"<p>" + item.info + "</p>" +
+							"</span>" +
+							"<span style='clear:both;'></span>" +
+						"</a>"
+					).appendTo( ul );
 			}		
 			else {	
 				return $( "<li></li>" )
