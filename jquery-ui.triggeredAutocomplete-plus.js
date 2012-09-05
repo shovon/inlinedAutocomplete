@@ -75,29 +75,41 @@
 
 		// If there is an 'img' then show it beside the label.
 
-		_renderItem:  function( ul, item ) {
-			if (item.img != undefined) {
-				return $( "<li></li>" )
-					.data( "item.autocomplete", item )
-					.append(
-						"<a>" +
+		_renderItem:  function (ul, item) {
+			var listItem = '',
+			    content  = "<p>" + item.label + "</p>";
+
+			if (typeof item.info != 'undefined' && item.info != '') {
+				content += "<p>" + item.info + "</p>";
+			}
+
+			if (typeof item.img != 'undefined' && item.img != '') {
+				listItem = 
+					"<a>" +
+						"<span class='columns'>" +
 							"<span class='image'>" +
 								"<img alt='Avatar' src='" + item.img + "'>"+
 							"</span>" +
 							"<span class='content'>" +
-								"<p>" + item.label + "</p>" +
-								"<p>" + item.info + "</p>" +
+								content +
 							"</span>" +
 							"<span style='clear:both;'></span>" +
-						"</a>"
-					).appendTo( ul );
-			}		
-			else {	
-				return $( "<li></li>" )
-					.data( "item.autocomplete", item )
-					.append( $( "<a></a>" ).text( item.label ) )
-					.appendTo( ul );
+						"</span>" +
+					"</a>";
+			} else {
+				listItem =
+					"<a>" +
+						"<span>" +
+							"<span class='content'>" +
+								content +
+							"</span>" +
+						"</span>" +
+					"</a>"
 			}
+
+			return $( "<li></li>" )
+				.data( "item.autocomplete", item )
+				.append(listItem).appendTo(ul);
 		},
 
 		// This stops the input box from being cleared when traversing the menu.
