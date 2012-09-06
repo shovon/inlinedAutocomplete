@@ -166,12 +166,17 @@
 			this.menu.deactivate();
 			this.menu.refresh();
 
+			var pos    = this.element.caretpixelpos(), 
+			    offset = this.element.offset();
+
 			// size and position menu
 			ul.show();
 			this._resizeMenu();
-			ul.position( $.extend({
-				of: this.element,
-			}, this.options.position ));
+			
+			ul.css({
+				left: pos.left,
+				top : pos.top
+			});
 
 			if ( this.options.autoFocus ) {
 				this.menu.next( new $.Event("mouseover") );
