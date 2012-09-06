@@ -85,10 +85,10 @@
 
 		_renderItem:  function (ul, item) {
 			var listItem = '',
-			    content  = "<p>" + item.label + "</p>";
+			    content  = "<p><strong>" + item.label + "</strong></p>";
 
 			if (typeof item.info != 'undefined' && item.info != '') {
-				content += "<p>" + item.info + "</p>";
+				content += "<p><em>" + item.info + "</em></p>";
 			}
 
 			if (typeof item.img != 'undefined' && item.img != '') {
@@ -101,7 +101,7 @@
 							"<span class='content'>" +
 								content +
 							"</span>" +
-							"<span style='clear:both;'></span>" +
+							"<span style='clear:both;padding: 0; margin: 0'></span>" +
 						"</span>" +
 					"</a>";
 			} else {

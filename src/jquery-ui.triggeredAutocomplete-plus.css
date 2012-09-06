@@ -1,6 +1,19 @@
 .triggered-autocomplete {
   background-image: none;
+  background-color: white;
   border-radius: 0;
+  min-width: 0;
+}
+
+.triggered-autocomplete .ui-menu-item a {
+  border-radius: 0;
+}
+
+.triggered-autocomplete .ui-menu-item a.ui-state-hover {
+  background-image: none;
+  background-color: black;
+  color: white;
+  border: none;
 }
 
 .triggered-autocomplete .ui-menu-item span {
@@ -17,7 +30,7 @@
 
 .triggered-autocomplete .ui-menu-item a .image {
   width: 37px;
-  margin-right: 16px;
+  margin-right: 8px;
 }
 
 .triggered-autocomplete .ui-menu-item p {

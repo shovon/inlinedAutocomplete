@@ -48,7 +48,7 @@ $(function () {
         hidden : '#hidden_auto-complete',
         source : data,
         trigger: '@',
-        width: 500,
+        width: 240,
         offsetLeft: -20
     });
 });
