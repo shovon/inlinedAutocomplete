@@ -1,27 +1,34 @@
-.ui-menu-item span {
+.triggered-autocomplete {
+  background-image: none;
+  border-radius: 0;
+}
+
+.triggered-autocomplete .ui-menu-item span {
   display: block;
   margin: 0;
   padding: 0;
 }
 
-.ui-menu-item a .columns .image,
-.ui-menu-item a .columns .content {
+.triggered-autocomplete .ui-menu-item a .columns .image,
+.triggered-autocomplete .ui-menu-item a .columns .content {
   float: left;
   clear: right;
 }
 
-.ui-menu-item a .image {
+.triggered-autocomplete .ui-menu-item a .image {
   width: 37px;
   margin-right: 16px;
 }
 
-.ui-menu-item p {
+.triggered-autocomplete .ui-menu-item p {
   padding: 0;
   margin: 0;
+  font-size: 12px;
 }
 
-.ui-menu-item img {
+.triggered-autocomplete .ui-menu-item img {
   padding-right: 10px;
   width: 37px;
   height: 37px;
 }
+
