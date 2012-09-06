@@ -43,7 +43,8 @@ $(function () {
         }
     ];
 
-    $('#auto-complete').triggeredAutocomplete({
+    var autoComplete = $('#auto-complete');
+    autoComplete.triggeredAutocomplete({
         hidden : '#hidden_auto-complete',
         source : data,
         trigger: '@'

@@ -18,7 +18,8 @@
 		
 		options: {
 			trigger: "@",
-			allowDuplicates: true
+			allowDuplicates: true,
+			width: 200
 		},
 
 		_create:function() {
@@ -169,13 +170,23 @@
 			ul.show();
 			this._resizeMenu();
 			ul.position( $.extend({
-				of: this.element
+				of: this.element,
 			}, this.options.position ));
 
 			if ( this.options.autoFocus ) {
 				this.menu.next( new $.Event("mouseover") );
 			}
 		},
+
+		_resizeMenu: function() {
+	        var ul = this.menu.element;
+	        ul.outerWidth( Math.max(
+	            // Firefox wraps long text (possibly a rounding bug)
+	            // so we add 1px to avoid the wrapping (#7513)
+	            ul.width( "" ).outerWidth() + 1,
+	            this.options.width
+	        ) );
+	    },
 
 		// Slightly altered the default ajax call to stop querying after the search produced no results.
 		// This is to prevent unnecessary querying.
