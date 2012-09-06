@@ -16,6 +16,8 @@
 ;(function ( $, window, document, undefined ) {
 	$.widget("ui.triggeredAutocomplete", $.extend(true, {}, $.ui.autocomplete.prototype, {
 		
+		lastPos: null,
+
 		options: {
 			trigger: "@",
 			allowDuplicates: true,
@@ -157,7 +159,23 @@
 			}	
 		},
 
+		close: function( event ) {
+	        clearTimeout( this.closing );
+	        if ( this.menu.element.is(":visible") ) {
+	            this.menu.element.hide();
+	            this.menu.deactivate();
+	            this._trigger( "close", event );
+	        }
+	    },
+
 		_suggest: function ( items ) {
+			var pos;
+			if (this.menu.element.is(':visible')) {
+				pos = {
+					left: this.menu.element.css('left'),
+					top: this.menu.element.css('top')
+				}
+			}
 			var ul = this.menu.element
 				.empty()
 				.zIndex( this.element.zIndex() + 1 );
@@ -166,13 +184,13 @@
 			this.menu.deactivate();
 			this.menu.refresh();
 
-			var pos    = this.element.caretpixelpos(), 
-			    offset = this.element.offset();
+			pos = pos || this.element.caretpixelpos();
+			var offset = this.element.offset();
 
 			// size and position menu
 			ul.show();
 			this._resizeMenu();
-			
+
 			ul.css({
 				left: pos.left,
 				top : pos.top
