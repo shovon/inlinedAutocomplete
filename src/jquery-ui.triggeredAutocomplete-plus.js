@@ -21,7 +21,9 @@
 		options: {
 			trigger: "@",
 			allowDuplicates: true,
-			width: 200
+			width: 300,
+			offsetLeft: 0,
+			offsetTop: 0
 		},
 
 		_create:function() {
@@ -192,8 +194,8 @@
 			this._resizeMenu();
 
 			ul.css({
-				left: pos.left,
-				top : pos.top
+				left: pos.left + this.options.offsetLeft,
+				top : pos.top + this.options.offsetTop
 			});
 
 			if ( this.options.autoFocus ) {

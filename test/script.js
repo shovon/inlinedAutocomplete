@@ -47,6 +47,8 @@ $(function () {
     autoComplete.triggeredAutocomplete({
         hidden : '#hidden_auto-complete',
         source : data,
-        trigger: '@'
+        trigger: '@',
+        width: 500,
+        offsetLeft: -20
     });
 });
