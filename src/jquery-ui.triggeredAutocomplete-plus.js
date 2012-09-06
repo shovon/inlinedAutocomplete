@@ -156,6 +156,27 @@
 			}	
 		},
 
+		_suggest: function ( items ) {
+			var ul = this.menu.element
+				.empty()
+				.zIndex( this.element.zIndex() + 1 );
+			this._renderMenu( ul, items );
+			// TODO refresh should check if the active item is still in the dom, removing the need for a manual deactivate
+			this.menu.deactivate();
+			this.menu.refresh();
+
+			// size and position menu
+			ul.show();
+			this._resizeMenu();
+			ul.position( $.extend({
+				of: this.element
+			}, this.options.position ));
+
+			if ( this.options.autoFocus ) {
+				this.menu.next( new $.Event("mouseover") );
+			}
+		},
+
 		// Slightly altered the default ajax call to stop querying after the search produced no results.
 		// This is to prevent unnecessary querying.
 
