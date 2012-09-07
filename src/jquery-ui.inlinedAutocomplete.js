@@ -322,6 +322,47 @@
 			this.menu[ direction ]( event );
 		},
 
+		// TODO: For both _suggest and _renderHelp, find a function to delegate
+		//     the heavy lifting to.
+
+		_renderHelp: function () {
+	        var pos;
+	        // This check is to prevent the menu to move as the user types. Just
+	        // Looks nicer.
+			if (this.menu.element.is(':visible')) {
+				pos = {
+					left: this.menu.element.css('left'),
+					top: this.menu.element.css('top')
+				}
+			}
+			var ul = this.menu.element
+				.empty()
+				.zIndex( this.element.zIndex() + 1 );
+			// TODO: FInd a more flexible way to set the inner text.
+			$('<li>Please type a name.</li>')
+				.appendTo(ul);
+			//this._renderMenu( ul, items );
+			// TODO refresh should check if the active item is still in the dom, removing the need for a manual deactivate
+			this.menu.deactivate();
+			this.menu.refresh();
+
+			pos = pos || this.element.caretpixelpos();
+			var offset = this.element.offset();
+
+			// size and position menu
+			ul.show();
+			this._resizeMenu();
+
+			ul.css({
+				left: pos.left + this.options.offsetLeft,
+				top : pos.top + this.options.offsetTop
+			});
+
+			if ( this.options.autoFocus ) {
+				this.menu.next( new $.Event("mouseover") );
+			}
+		},
+
 		search: function(value, event) {
 
 			var contents = this.element.val();
@@ -347,7 +388,9 @@
 					this.updateHidden();
 					return this._search(term);
 				}
-				else this.close();
+				else this._renderHelp()//this.close();
+			} else {
+				this.close();
 			}	
 		},
 
