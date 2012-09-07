@@ -24,7 +24,8 @@
 			width: 300,
 			offsetLeft: 0,
 			offsetTop: 0,
-			autoFocus: true
+			autoFocus: true,
+			delay: 10
 		},
 
 		_create:function() {
