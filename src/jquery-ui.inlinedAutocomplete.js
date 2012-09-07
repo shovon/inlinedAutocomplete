@@ -46,7 +46,7 @@
 			this.ac._create.apply(this, arguments);
 			
 			// Add our custom class here.
-			this.menu.element.addClass('triggered-autocomplete');
+			this.menu.element.addClass('inlined-autocomplete');
 
 			this.updateHidden();
 
