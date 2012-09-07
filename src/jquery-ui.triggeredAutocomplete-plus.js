@@ -23,7 +23,8 @@
 			allowDuplicates: true,
 			width: 300,
 			offsetLeft: 0,
-			offsetTop: 0
+			offsetTop: 0,
+			autoFocus: true
 		},
 
 		_create:function() {
