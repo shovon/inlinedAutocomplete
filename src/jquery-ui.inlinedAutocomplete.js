@@ -80,7 +80,6 @@
 	                    self.menu.select( event );
 	                    break;
 	                case keyCode.ESCAPE:
-	                    //self.element.val( self.term );
 	                    self.close( event );
 	                    break;
 	                default:
