@@ -5,6 +5,9 @@
   min-width: 0;
   margin: 0;
   padding: 0;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .triggered-autocomplete .ui-menu-item a {
@@ -12,6 +15,11 @@
   border: none;
   margin: 0;
   padding: 7px 7px 0 7px;
+}
+
+.triggered-autocomplete .ui-menu-item:last-child a {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .triggered-autocomplete .ui-menu-item a.ui-state-hover {
