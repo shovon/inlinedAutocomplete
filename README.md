@@ -58,4 +58,4 @@ And then, to run the test server, call the following command*.
 
 You should now be able to navigate to `http://localhost:3000/test`* to see the plugin in action.
 
-* If you have port 3000 occupied, you can also run the server on another port, by passing in your alternate port number like so `coffee server.coffee 4000`.
+*If you have port 3000 occupied, you can also run the server on another port, by passing in your alternate port number like so `coffee server.coffee 4000`.
