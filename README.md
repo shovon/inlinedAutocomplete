@@ -1,7 +1,11 @@
-jQuery UI Triggered Autocomplete
+jQuery UI Triggered Autocomplete Plus
 ====================
 
 This widget lets you search for users to @mention in your posts.  It works very much like Facebook and Google+ in that it supports users with spaces in their name.  It writes to a hidden field with the user ID's formatted in this way: @[12345] while showing @username in the input box.  You can save the encoded string for easier parsing at display time.
+
+This is a fork of [@**Hawkers**](https://github.com/Hawkers), [Triggered Autocomplete](https://github.com/Hawkers/triggeredAutocomplete) plugin.
+
+## How to Use
 
 ```
 $('#inputbox').triggeredAutocomplete({
@@ -34,3 +38,24 @@ This also supports an optional img to appear beside each result.  You just need 
 ```
 
 If you want editable posts, you need to pass an id_map as an attr tag of the input box.  This is also json encoded and is simply an associative array of the included user_id => username pairs in the existing post. This is so when you change the post the original @mentions are preserved in their @[12345] format.
+
+## Developing/Testing
+
+Be sure that you have [node.js](http://nodejs.org/) installed. 
+
+And then, you'd also need a copy of CoffeeScript running. Just install it like so.
+
+    # May require `sudo`
+    $ npm install -g coffee-script
+
+After that, be sure to call the following command to install the dependencies that will allow you to test the plugin.
+
+    $ ./dependencies
+
+And then, to run the test server, call the following command*.
+
+    $ coffee server.coffee
+
+You should now be able to navigate to `http://localhost:3000/test`* to see the plugin in action.
+
+* If you have port 3000 occupied, you can also run the server on another port, by passing in your alternate port number like so `coffee server.coffee 4000`.

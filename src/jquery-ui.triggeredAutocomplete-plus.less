@@ -1,3 +1,6 @@
+@border-radius: 5px;
+@highlight-background-color: lighten(#202080, 20%);
+
 .triggered-autocomplete {
   background-image: none;
   background-color: white;
@@ -13,20 +16,22 @@
 .triggered-autocomplete .ui-menu-item a {
   border-radius: 0;
   border: none;
+  border-bottom: solid 1px #eee;
   margin: 0;
   padding: 7px 7px 0 7px;
 }
 
 .triggered-autocomplete .ui-menu-item:last-child a {
+  border-bottom: none;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 
 .triggered-autocomplete .ui-menu-item a.ui-state-hover {
   background-image: none;
-  background-color: black;
+  background-color: @highlight-background-color;
   color: white;
-  border: none;
+  border-bottom: solid 1px @highlight-background-color;
   padding: 7px 7px 0 7px;
   margin: 0;
 }
