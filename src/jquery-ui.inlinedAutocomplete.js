@@ -322,8 +322,13 @@
 			this.menu[ direction ]( event );
 		},
 
+		// TODO: For both _suggest and _renderHelp, find a function to delegate
+		//     the heavy lifting to.
+
 		_renderHelp: function () {
 	        var pos;
+	        // This check is to prevent the menu to move as the user types. Just
+	        // Looks nicer.
 			if (this.menu.element.is(':visible')) {
 				pos = {
 					left: this.menu.element.css('left'),
@@ -384,6 +389,8 @@
 					return this._search(term);
 				}
 				else this._renderHelp()//this.close();
+			} else {
+				this.close();
 			}	
 		},
 
