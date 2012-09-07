@@ -25,7 +25,8 @@
 			offsetLeft: 0,
 			offsetTop: 0,
 			autoFocus: true,
-			delay: 10
+			delay: 10,
+			helpMessage: "Please type a name."
 		},
 
 	    __create: function() {
@@ -338,10 +339,14 @@
 			var ul = this.menu.element
 				.empty()
 				.zIndex( this.element.zIndex() + 1 );
-			// TODO: FInd a more flexible way to set the inner text.
-			$('<li>Please type a name.</li>')
-				.appendTo(ul);
-			//this._renderMenu( ul, items );
+
+			$('<li></li>')
+				.append(
+					$('<span></span>')
+					.addClass('help-message')
+					.text(this.options.helpMessage)
+				).appendTo(ul);
+
 			// TODO refresh should check if the active item is still in the dom, removing the need for a manual deactivate
 			this.menu.deactivate();
 			this.menu.refresh();
