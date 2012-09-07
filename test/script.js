@@ -44,7 +44,7 @@ $(function () {
     ];
 
     var autoComplete = $('#auto-complete');
-    autoComplete.triggeredAutocomplete({
+    autoComplete.inlinedAutocomplete({
         hidden : '#hidden_auto-complete',
         source : data,
         trigger: '@',

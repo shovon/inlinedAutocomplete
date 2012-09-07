@@ -14,7 +14,7 @@
 */
 
 ;(function ( $, window, document, undefined ) {
-	$.widget("ui.triggeredAutocomplete", $.extend(true, {}, $.ui.autocomplete.prototype, {
+	$.widget("ui.inlinedAutocomplete", $.extend(true, {}, $.ui.autocomplete.prototype, {
 		
 		lastPos: null,
 

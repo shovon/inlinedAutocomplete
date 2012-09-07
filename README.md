@@ -10,7 +10,7 @@ Only difference is, the autocomplete is inlined with text, instead of at the bot
 ## How to Use
 
 ```
-$('#inputbox').triggeredAutocomplete({
+$('#inputbox').inlinedAutocomplete({
 	hidden: '#hidden_inputbox,
 	source: "/search.php",
 	trigger: "@" 
@@ -26,7 +26,7 @@ You can use a predefined array or json as a source.  Example json result:
 To use the hidden field without an ajax call you need to pass an associative array:
 
 ```
-$('#inputbox').triggeredAutocomplete({
+$('#inputbox').inlinedAutocomplete({
 	hidden: '#hidden_inputbox,
 	source: new Array({ "value": "1234", "label": 'Geech'}, {"value": "5312", "label": "Marf"})
 });
