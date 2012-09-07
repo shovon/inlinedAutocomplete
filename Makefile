@@ -1,8 +1,8 @@
 all:
 	mkdir -p bin
-	cp src/jquery-ui.triggeredAutocomplete-plus.js bin/jquery-ui.triggeredAutocomplete-plus.js
-	lessc src/jquery-ui.triggeredAutocomplete-plus.less bin/jquery-ui.triggeredAutocomplete-plus.css
+	cp src/jquery-ui.inlinedAutocomplete.js bin/jquery-ui.inlinedAutocomplete.js
+	lessc src/jquery-ui.inlinedAutocomplete.less bin/jquery-ui.inlineAutocomplete.css
 
 clean:
 	@rm -rfv bin
-	@rm -rfv src/jquery-ui.triggeredAutocomplete-plus.css
+	@rm -rfv src/jquery-ui.inlinedAutocomplete.css
