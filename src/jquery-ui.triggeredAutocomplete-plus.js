@@ -106,7 +106,7 @@
 					"</a>";
 			} else {
 				listItem =
-					"<a>" +
+					"<a class='no-image'>" +
 						"<span>" +
 							"<span class='content'>" +
 								content +
