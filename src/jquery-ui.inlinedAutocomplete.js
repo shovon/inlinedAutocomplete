@@ -381,15 +381,25 @@
 				// Only query the server if we have a term and we haven't received a null response.
 				// First check the current query to see if it already returned a null response.
 
-				if(this.stopIndex == contents.lastIndexOf(this.options.trigger) && term.length > this.stopLength) { term = ''; }
-			
-				if(term.length > 0) {
-					// Updates the hidden field to check if a name was removed so that we can put them back in the list.
+				if (this.stopIndex == contents.lastIndexOf(this.options.trigger) &&
+					term.length > this.stopLength) {
+					term = '';
+				}
+
+				// TODO: Maybe allow the user to decide whether to ignore
+				//     triggers on whitespaces?
+				if (!/\s/.test(contents[contents.lastIndexOf(this.options.trigger) - 1])) {
+					// If we are here, this means that there was no white space
+					// before the trigger.
+					this.close();
+				} else if (term.length > 0) {
 					this.updateHidden();
 					return this._search(term);
+				} else {
+					this._renderHelp();
 				}
-				else this._renderHelp()//this.close();
 			} else {
+				// Call this whenever the user deletes the trigger.
 				this.close();
 			}	
 		},
