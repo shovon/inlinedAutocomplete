@@ -44,6 +44,7 @@ $(function () {
     ];
 
     var autoComplete = $('#auto-complete');
+    autoComplete.autosize();
     autoComplete.inlinedAutocomplete({
         hidden : '#hidden_auto-complete',
         source : data,

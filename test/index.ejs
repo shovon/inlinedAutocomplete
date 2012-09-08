@@ -14,9 +14,12 @@
   </head>
 
   <body>
-    <textarea class="text_area" id="auto-complete">This is a test. This is a really awesome test. It's awesome, that you will find it really awesome. Like, the awesomeness is just unnimaginable. That's how awesome it is.</textarea>
+    <div>
+      <textarea class="text_area" placeholder="Use the '@' symbol, and see suggestions..." id="auto-complete"></textarea>
+    </div>
 
     <script type="text/javascript" src="jquery-1.8.1.min.js"></script>
+    <script type="text/javascript" src="jquery.autosize.js"></script>
     <script type="text/javascript" src="jquery.caretpixelpos.min.js"></script>
     <script type="text/javascript" src="jquery-ui-1.8.23.custom.min.js"></script>
     <% if (typeof build == 'undefined' || !build) { %>
