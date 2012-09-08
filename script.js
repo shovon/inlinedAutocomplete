@@ -1,45 +1,45 @@
 $(function () {
     var data = [
         {
-            label: 'Mike Edward',
+            label: 'Lisa Stewart',
+            value: 'lisa',
+            //img: 'images/lisa.jpg',
+            info: 'lisa@somewhere.com'
+        },
+
+        {
+            label: 'Mike Johnson',
             value: 'mike',
-            //img: 'images/amin.jpg',
+            img: 'images/mike.jpg',
             info: 'mike@somewhere.com'
         },
 
         {
-            label: 'Edward King',
-            value: 'edward',
-            img: 'images/kevin.png',
-            info: 'edward@somewhere.com'
+            label: 'Steve Friedman',
+            value: 'steve',
+            img: 'images/steve.jpg',
+            info: 'steve@somewhere.com'
         },
 
         {
-            label: 'Alex Jones',
-            value: 'alex',
-            img: 'images/numan.jpg',
-            info: 'alex@somewhere.com'
+            label: 'Tamara Lu',
+            value: 'tamara',
+            img: 'images/lisa.jpg'
+            //info: 'tamara@somewhere.com'
         },
 
         {
-            label: 'John Michaels',
-            value: 'john',
-            img: 'images/amin.jpg'
-            //info: 'john@somewhere.com'
-        },
-
-        {
-            label: 'Peter Griffin',
+            label: 'Peter McMahon',
             value: 'peter',
-            img: 'images/kevin.png',
-            info: 'peter@somewhere.com'
+            img: 'images/mike.jpg',
+            info: 'mike@somewhere.com'
         },
-
+        
         {
-            label: 'Stewart The Third',
-            value: 'stewart',
-            img: 'images/numan.jpg',
-            info: 'stewart@somewhere.com'
+            label: 'Suzanne Karter',
+            value: 'jeneva',
+            img: 'images/lisa.jpg',
+            info: 'suzanne@somewhere.com'
         }
     ];
 
