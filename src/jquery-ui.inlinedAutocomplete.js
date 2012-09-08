@@ -405,8 +405,12 @@
 					// before the trigger.
 					this.close();
 				} else if (term.length > 0) {
-					this.updateHidden();
-					return this._search(term);
+					if (/\s/.test(term)) {
+						this.close()
+					} else {
+						this.updateHidden();
+						return this._search(term);
+					}
 				} else {
 					this._renderHelp();
 				}
