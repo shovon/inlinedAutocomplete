@@ -326,8 +326,8 @@
 		// TODO: For both _suggest and _renderHelp, find a function to delegate
 		//     the heavy lifting to.
 
-		_renderHelp: function () {
-	        var pos;
+		_showMenu: function (fn) {
+			var pos;
 	        // This check is to prevent the menu to move as the user types. Just
 	        // Looks nicer.
 			if (this.menu.element.is(':visible')) {
@@ -339,17 +339,13 @@
 			var ul = this.menu.element
 				.empty()
 				.zIndex( this.element.zIndex() + 1 );
-
-			$('<li></li>')
-				.append(
-					$('<span></span>')
-					.addClass('help-message')
-					.text(this.options.helpMessage)
-				).appendTo(ul);
+			
+			fn.call(this, ul);
 
 			// TODO refresh should check if the active item is still in the dom, removing the need for a manual deactivate
 			this.menu.deactivate();
 			this.menu.refresh();
+
 
 			pos = pos || this.element.caretpixelpos();
 			var offset = this.element.offset();
@@ -366,6 +362,17 @@
 			if ( this.options.autoFocus ) {
 				this.menu.next( new $.Event("mouseover") );
 			}
+		},
+
+		_renderHelp: function () {
+			this._showMenu(function (ul) {
+		        $('<li></li>')
+					.append(
+						$('<span></span>')
+							.addClass('help-message')
+							.text(this.options.helpMessage)
+					).appendTo(ul);
+			});
 		},
 
 		search: function(value, event) {
@@ -419,36 +426,9 @@
 	    },
 
 		_suggest: function ( items ) {
-			var pos;
-			if (this.menu.element.is(':visible')) {
-				pos = {
-					left: this.menu.element.css('left'),
-					top: this.menu.element.css('top')
-				}
-			}
-			var ul = this.menu.element
-				.empty()
-				.zIndex( this.element.zIndex() + 1 );
-			this._renderMenu( ul, items );
-			// TODO refresh should check if the active item is still in the dom, removing the need for a manual deactivate
-			this.menu.deactivate();
-			this.menu.refresh();
-
-			pos = pos || this.element.caretpixelpos();
-			var offset = this.element.offset();
-
-			// size and position menu
-			ul.show();
-			this._resizeMenu();
-
-			ul.css({
-				left: pos.left + this.options.offsetLeft,
-				top : pos.top + this.options.offsetTop
+			this._showMenu(function (ul) {
+				this._renderMenu( ul, items );
 			});
-
-			if ( this.options.autoFocus ) {
-				this.menu.next( new $.Event("mouseover") );
-			}
 		},
 
 		_resizeMenu: function() {
