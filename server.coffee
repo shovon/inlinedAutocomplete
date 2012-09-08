@@ -14,6 +14,7 @@
 express        = require('express')
 path           = require('path')
 lessMiddleware = require 'less-middleware'
+ejsMiddleware  = require 'ejs-middleware'
 
 # Variables
 publicPath = path.resolve('.')
@@ -31,8 +32,12 @@ server.configure ->
 
     # Routing
     server.use server.router
+
     server.use lessMiddleware
         src: publicPath
+
+    server.use ejsMiddleware publicPath
+
     server.use express.static publicPath
     server.use express.directory publicPath
 
