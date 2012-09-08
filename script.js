@@ -44,11 +44,13 @@ $(function () {
     ];
 
     var autoComplete = $('#auto-complete');
+    autoComplete.autosize();
     autoComplete.inlinedAutocomplete({
         hidden : '#hidden_auto-complete',
         source : data,
         trigger: '@',
         width: 240,
-        offsetLeft: -20
+        offsetLeft: 6,
+        offsetTop: 10
     });
 });

@@ -400,7 +400,8 @@
 
 				// TODO: Maybe allow the user to decide whether to ignore
 				//     triggers on whitespaces?
-				if (!/\s/.test(contents[contents.lastIndexOf(this.options.trigger) - 1])) {
+				if (contents.lastIndexOf(this.options.trigger) > 0 &&
+					!/\s/.test(contents[contents.lastIndexOf(this.options.trigger) - 1])) {
 					// If we are here, this means that there was no white space
 					// before the trigger.
 					this.close();
