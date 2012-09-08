@@ -1,0 +1,84 @@
+@border-radius             : 5px;
+@highlight-background-color: lighten(#202080, 20%);
+@menu-item-padding         : 9px;
+@image-size                : 37px;
+@font-size                 : 12px;
+
+.inlined-autocomplete {
+  background-image: none;
+  background-color: white;
+  border-radius: 0;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+  border-bottom-left-radius: @border-radius;
+  border-bottom-right-radius: @border-radius;
+
+  .ui-menu-item {
+    a {
+      border-radius: 0;
+      border: none;
+      border-bottom: solid 1px #eee;
+      margin: 0;
+      padding: @menu-item-padding @menu-item-padding 0 @menu-item-padding;
+    }
+
+    &:last-child { // .triggered-autocomplete .ui-menu-item:last-child a
+      a {
+        border-bottom: none;
+        border-bottom-left-radius: @border-radius;
+        border-bottom-right-radius: @border-radius;
+      }
+    }
+
+    a.ui-state-hover {
+      background-image: none;
+      background-color: @highlight-background-color;
+      color: white;
+      border-bottom: solid 1px @highlight-background-color;
+      padding: @menu-item-padding @menu-item-padding 0 @menu-item-padding;
+      margin: 0;
+    }
+
+    a.no-image,
+    a.ui-state-hover.no-image {
+      padding: @menu-item-padding;
+    }
+
+    span {
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+
+    a .columns .image,
+    a .columns .content {
+      float: left;
+      clear: right;
+    }
+    
+    a .image {
+      width: @image-size;
+      margin-right: 8px;
+    }
+
+    p {
+      padding: 0;
+      margin: 0;
+      font-size: @font-size;
+    }
+
+    img {
+      padding-right: 10px;
+      width: @image-size;
+      height: @image-size;
+    }
+  }
+
+  .help-message {
+    display: block;
+    font-size: @font-size;
+    padding: @menu-item-padding;
+  }
+}

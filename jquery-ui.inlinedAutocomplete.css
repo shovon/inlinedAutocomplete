@@ -1,0 +1,64 @@
+.inlined-autocomplete {
+  background-image: none;
+  background-color: white;
+  border-radius: 0;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.inlined-autocomplete .ui-menu-item a {
+  border-radius: 0;
+  border: none;
+  border-bottom: solid 1px #eee;
+  margin: 0;
+  padding: 9px 9px 0 9px;
+}
+.inlined-autocomplete .ui-menu-item:last-child a {
+  border-bottom: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.inlined-autocomplete .ui-menu-item a.ui-state-hover {
+  background-image: none;
+  background-color: #3939cd;
+  color: white;
+  border-bottom: solid 1px #3939cd;
+  padding: 9px 9px 0 9px;
+  margin: 0;
+}
+.inlined-autocomplete .ui-menu-item a.no-image,
+.inlined-autocomplete .ui-menu-item a.ui-state-hover.no-image {
+  padding: 9px;
+}
+.inlined-autocomplete .ui-menu-item span {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+.inlined-autocomplete .ui-menu-item a .columns .image,
+.inlined-autocomplete .ui-menu-item a .columns .content {
+  float: left;
+  clear: right;
+}
+.inlined-autocomplete .ui-menu-item a .image {
+  width: 37px;
+  margin-right: 8px;
+}
+.inlined-autocomplete .ui-menu-item p {
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+}
+.inlined-autocomplete .ui-menu-item img {
+  padding-right: 10px;
+  width: 37px;
+  height: 37px;
+}
+.inlined-autocomplete .help-message {
+  display: block;
+  font-size: 12px;
+  padding: 9px;
+}
