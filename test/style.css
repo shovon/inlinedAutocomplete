@@ -1,5 +1,17 @@
+html {
+    background-color: #C9D5F0;
+}
+
+.center-column {
+    width: 500px;
+    margin: 0 auto;
+}
+
 .text_area {
-    width: 350px;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     height: 200px;
     resize: none;
     padding: 12px;

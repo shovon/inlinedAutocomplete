@@ -50,6 +50,7 @@ $(function () {
         source : data,
         trigger: '@',
         width: 240,
-        offsetLeft: -20
+        offsetLeft: 6,
+        offsetTop: 10
     });
 });
