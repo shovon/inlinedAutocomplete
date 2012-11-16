@@ -388,7 +388,7 @@
 				// Get the contents up to the cursortPos first then get the lastIndexOf the trigger to find the search term.
 
 				contents = contents.substring(0, cursorPos);
-				var term = contents.substring(contents.lastIndexOf(this.options.trigger) + 1, contents.length);
+				var term = contents.substring(contents.lastIndexOf(this.options.trigger) + this.options.trigger.length, contents.length);
 
 				// Only query the server if we have a term and we haven't received a null response.
 				// First check the current query to see if it already returned a null response.
