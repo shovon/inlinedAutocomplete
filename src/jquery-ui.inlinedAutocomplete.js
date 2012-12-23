@@ -26,12 +26,13 @@
 			offsetTop: 0,
 			autoFocus: true,
 			delay: 10,
-			helpMessage: "Please type a name."
+			helpMessage: "Please type a name.",
+			window: window
 		},
 
 	    __create: function() {
 	        var self = this,
-	            doc = this.element[ 0 ].ownerDocument,
+	            doc = $(this.options.appendTo)[0].ownerDocument || this.element[ 0 ].ownerDocument,
 	            suppressKeyPress;
 	        this.isMultiLine = this.element.is( "textarea" );
 
@@ -53,17 +54,25 @@
 	                var keyCode = $.ui.keyCode;
 	                switch( event.keyCode ) {
 	                case keyCode.PAGE_UP:
-	                    self._move( "previousPage", event );
-	                    break;
+	                    if(self.menu.element.is(":visible")){
+	                        self._move( "previousPage", event );
+	                        break;
+	                    }
 	                case keyCode.PAGE_DOWN:
-	                    self._move( "nextPage", event );
-	                    break;
+	                    if(self.menu.element.is(":visible")){
+	                        self._move( "nextPage", event );
+	                        break;
+	                    }
 	                case keyCode.UP:
-	                    self._keyEvent( "previous", event );
-	                    break;
+	                    if(self.menu.element.is(":visible")){
+	                        self._keyEvent( "previous", event );
+	                        break;
+	                    }
 	                case keyCode.DOWN:
-	                    self._keyEvent( "next", event );
-	                    break;
+	                    if(self.menu.element.is(":visible")){
+	                        self._keyEvent( "next", event );
+	                        break;
+	                    }
 	                case keyCode.ENTER:
 	                case keyCode.NUMPAD_ENTER:
 	                    // when menu is open and has focus
@@ -87,8 +96,27 @@
 	                    // keypress is triggered before the input value is changed
 	                    clearTimeout( self.searching );
 	                    self.searching = setTimeout(function() {
+	                        if(self.element.attr('contentEditable') == 'true'){
+	                            if (document.selection){
+	                                var range = document.selection.createRange();
+	                                var rangeCopy = range.duplicate(); //Create a copy
+	                                var rangeObj = range.duplicate();
+	                                rangeCopy.collapse(true);
+	                                rangeCopy.moveEnd('character',1);
+	                                var parentElement = rangeCopy.parentElement();
+	                                rangeObj.moveToElementText(parentElement);
+	                                rangeObj.setEndPoint('EndToEnd',rangeCopy);
+	                                var val = rangeObj.text;
+	                            }else{
+	                                var range = self.element.inlinedAutocomplete('option', 'window').getSelection().getRangeAt(0);
+	                                val = range.startContainer.textContent;
+	                            }
+	                    	}
+	                    	else{
+	                    		val = self.element.val();
+	                    	}
 	                        // only search if the value has changed
-	                        if ( self.term != self.element.val() ) {
+	                        if ( self.term != val) {
 	                            self.selectedItem = null;
 	                            self.search( null, event );
 	                        }
@@ -108,7 +136,16 @@
 	                }
 
 	                self.selectedItem = null;
-	                self.previous = self.element.val();
+                	if(self.element.attr('contentEditable') == 'true'){
+                    	try{
+                    		var range = self.element.inlinedAutocomplete('option', 'window').getSelection().getRangeAt(0);
+                			self.previous = range.startContainer.textContent;
+                		}catch(err){
+                		}
+                	}
+                	else{
+                		self.previous = self.element.val();
+                	}
 	            })
 	            .bind( "blur.autocomplete", function( event ) {
 	                if ( self.options.disabled ) {
@@ -156,7 +193,13 @@
 	                    if ( false !== self._trigger( "focus", event, { item: item } ) ) {
 	                        // use value to match what will end up in the input, if it was a key event
 	                        if ( /^key/.test(event.originalEvent.type) ) {
-	                            self.element.val( item.value );
+        	                	if(self.element.attr('contentEditable') == 'true'){
+        	                    	var range = self.element.inlinedAutocomplete('option', 'window').getSelection().getRangeAt(0);
+        	                		range.startContainer.textContent = item.value;
+    		                	}
+    		                	else{
+    		                		self.element.val( item.value );
+    		                	}
 	                        }
 	                    }
 	                },
@@ -178,11 +221,23 @@
 	                    }
 
 	                    if ( false !== self._trigger( "select", event, { item: item } ) ) {
-	                        self.element.val( item.value );
+    	                	if(self.element.attr('contentEditable') == 'true'){
+    	                		var range = self.element.inlinedAutocomplete('option', 'window').getSelection().getRangeAt(0);
+    	                		range.startContainer.textContent = item.value;
+		                	}
+		                	else{
+		                		self.element.val( item.value );
+		                	}
 	                    }
 	                    // reset the term after the select event
 	                    // this allows custom select handling to work properly
-	                    self.term = self.element.val();
+                    	if(self.element.attr('contentEditable') == 'true'){
+                    		var range = self.element.inlinedAutocomplete('option', 'window').getSelection().getRangeAt(0);
+	                		self.term = range.startContainer.textContent;
+                    	}
+                    	else{
+                    		 self.term = self.element.val();
+                    	}
 
 	                    self.close( event );
 	                    self.selectedItem = item;
@@ -190,13 +245,24 @@
 	                blur: function( event, ui ) {
 	                    // don't set the value of the text field if it's already correct
 	                    // this prevents moving the cursor unnecessarily
-	                    if ( self.menu.element.is(":visible") &&
-	                        ( self.element.val() !== self.term ) ) {
-	                        self.element.val( self.term );
-	                    }
-	                }
+                        if ( self.menu.element.is(":visible") ) {
+                            if(self.element.attr('contentEditable') == 'true'){
+                                if(self.element.val() !== self.term ){
+                                    var range = self.element.inlinedAutocomplete('option', 'window').getSelection().getRangeAt(0);
+                                    pos = range.startOffset;
+                                    range.startContainer.textContent = self.term;
+                                    range.set(pos);
+                                }
+                            }
+                            else{
+                                if(self.element.text() !== self.term ){
+                                   self.element.val( self.term );
+                                }
+                            }
+                        }
+                    }
 	            })
-	            .zIndex( this.element.zIndex() + 1 )
+	            .zIndex( 1000 )
 	            // workaround for jQuery bug #5781 http://dev.jquery.com/ticket/5781
 	            .css({ top: 0, left: 0 })
 	            .hide()
@@ -250,7 +316,17 @@
 				var start = contents.substring(0, cursorPos);
 				start = start.substring(0, start.lastIndexOf(self.options.trigger));
 
-				this.value = start + self.options.trigger+ui.item.value+' ' + end;
+                if($(this).attr('contentEditable') == 'true'){
+                    sel = $(this).inlinedAutocomplete('option', 'window').getSelection();
+                    range = sel.getRangeAt(0);
+                    pos = start.length + 1 + ui.item.value.length;
+                    range.startContainer.textContent = start + self.options.trigger+ui.item.value+' ' + end;
+                    range.setStart(range.startContainer, pos);
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                }else{
+                    this.value = start + self.options.trigger+ui.item.value+' ' + end;
+                }
 
 				// Create an id map so we can create a hidden version of this string with id's instead of labels.
 
@@ -338,7 +414,7 @@
 			}
 			var ul = this.menu.element
 				.empty()
-				.zIndex( this.element.zIndex() + 1 );
+				.zIndex( 1000 );
 			
 			fn.call(this, ul);
 
@@ -347,7 +423,64 @@
 			this.menu.refresh();
 
 
-			pos = pos || this.element.caretpixelpos();
+			getCaretPixelPos = function (element, offsetx, offsety){
+			    offsetx = offsetx || 0;
+			    offsety = offsety || 0;
+
+			    var nodeLeft = 0,
+			        nodeTop = 0;
+			    if (element){
+			        offset = element.offset();
+			        nodeLeft = offset.left;
+			        nodeTop = offset.top;
+			    }
+
+			    var pos = {left: 0, top: 0};
+
+			    if (document.selection){
+			        var range = document.selection.createRange();
+			        pos.left = range.offsetLeft + offsetx + $(range.parentElement()).position().left;
+			        pos.top = range.offsetTop + offsety + $(range.parentElement()).height() + $(range.parentElement()).position().top;
+			    }else if (element.inlinedAutocomplete('option', 'window').getSelection){
+			        var sel = element.inlinedAutocomplete('option', 'window').getSelection();
+			        var range = sel.getRangeAt(0).cloneRange();
+			        try{
+			            range.setStart(range.startContainer, range.startOffset-1);
+			        }catch(e){}
+			        var rect = range.getBoundingClientRect();
+			        if (range.endOffset == 0 || range.toString() === ''){
+			            // first char of line
+			            if (range.startContainer == $node){
+			                // empty div
+			                if (range.endOffset == 0){
+			                    pos.top = '0';
+			                    pos.left = '0';
+			                }else{
+			                    // firefox need this
+			                    var range2 = range.cloneRange();
+			                    range2.setStart(range2.startContainer, 0);
+			                    var rect2 = range2.getBoundingClientRect();
+			                    pos.left = rect2.left + offsetx - nodeLeft;
+			                    pos.top = rect2.top + rect2.height + offsety - nodeTop;
+			                }
+			            }else{
+			                pos.top = range.startContainer.offsetTop;
+			                pos.left = range.startContainer.offsetLeft;
+			            }
+			        }else{
+			            pos.left = rect.left + rect.width + offsetx;
+			            pos.top = rect.top + rect.height + offsety;
+			        }
+			    }
+			    return pos;
+			};
+			
+			if(this.element.attr('contentEditable')){
+			    pos = getCaretPixelPos(this.element)
+			}else{
+			    pos = pos || this.element.caretpixelpos();
+			}
+			
 			var offset = this.element.offset();
 
 			// size and position menu
@@ -377,8 +510,33 @@
 
 		search: function(value, event) {
 
-			var contents = this.element.val();
-			var cursorPos = this.getCursor();
+            if(this.element.attr('contentEditable') == 'true'){
+                if (document.selection){
+                    var range = document.selection.createRange();
+                    var rangeCopy = range.duplicate(); //Create a copy
+                    var rangeObj = range.duplicate();
+                    rangeCopy.collapse(true);
+                    rangeCopy.moveEnd('character',1);
+                    var parentElement = rangeCopy.parentElement();
+                    rangeObj.moveToElementText(parentElement);
+                    rangeObj.setEndPoint('EndToEnd',rangeCopy);
+                    var contents = rangeObj.text;
+                    
+                    var range2 = document.selection.createRange();
+                    range2.moveToElementText(range.parentElement());
+                    range2.setEndPoint('EndToStart', range);
+                    var cursorPos = range2.text.length;
+                }else{
+                    var range = this.element.inlinedAutocomplete('option', 'window').getSelection().getRangeAt(0);
+                    var contents = range.startContainer.textContent;
+                    var cursorPos = range.startOffset;
+                }
+	       	}
+	       	else{
+	       		var contents = this.element.val();
+	       		var cursorPos = this.getCursor();
+	       	}			
+			
 			this.contents = contents;
 			this.cursorPos = cursorPos;
 
@@ -527,7 +685,16 @@
 		updateHidden: function() {
 			var trigger = this.options.trigger;
 
-			var contents = this.element.val();
+        	if(this.element.attr('contentEditable') == 'true'){
+            	try{
+            		var range = this.element.inlinedAutocomplete('option', 'window').getSelection().getRangeAt(0);
+            		var contents = range.startContainer.textContent;
+            	}catch(err){
+            		
+            	}
+	       	}else{
+	       		var contents = this.element.val();
+	       	}
 			for(var key in this.id_map) {
 				var find = trigger+key;
 				find = find.replace(/[^a-zA-Z 0-9@]+/g,'\\$&');
