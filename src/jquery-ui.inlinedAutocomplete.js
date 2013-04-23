@@ -563,7 +563,7 @@
 					// If we are here, this means that there was no white space
 					// before the trigger.
 					this.close();
-				} else if (term.length > 0) {
+				} else if (term.length >= this.options.minLength) {
 					if (/\s/.test(term)) {
 						this.close()
 					} else {
