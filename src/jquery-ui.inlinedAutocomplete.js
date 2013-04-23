@@ -319,13 +319,13 @@
                 if($(this).attr('contentEditable') == 'true'){
                     sel = $(this).inlinedAutocomplete('option', 'window').getSelection();
                     range = sel.getRangeAt(0);
-                    pos = start.length + 1 + ui.item.value.length;
-                    range.startContainer.textContent = start + self.options.trigger+ui.item.value+' ' + end;
+                    pos = start.length + self.options.trigger.length + ui.item.value.length;
+                    range.startContainer.textContent = start + self.options.trigger+ui.item.value + end;
                     range.setStart(range.startContainer, pos);
                     sel.removeAllRanges();
                     sel.addRange(range);
                 }else{
-                    this.value = start + self.options.trigger+ui.item.value+' ' + end;
+                    this.value = start + self.options.trigger + ui.item.value + end;
                 }
 
 				// Create an id map so we can create a hidden version of this string with id's instead of labels.
