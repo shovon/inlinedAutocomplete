@@ -31,9 +31,14 @@
 		},
 
 	    __create: function() {
-	        var self = this,
-	            doc = $(this.options.appendTo)[0].ownerDocument || this.element[ 0 ].ownerDocument,
-	            suppressKeyPress;
+	        var self = this;
+	        if(this.options.appendTo != undefined){
+                var doc = $(this.options.appendTo)[0].ownerDocument || this.element[ 0 ].ownerDocument;
+            }else{
+                var doc = $('body')[0].ownerDocument || this.element[ 0 ].ownerDocument;
+            }
+
+	        var suppressKeyPress;
 	        this.isMultiLine = this.element.is( "textarea" );
 
 	        this.element
@@ -266,7 +271,7 @@
 	            // workaround for jQuery bug #5781 http://dev.jquery.com/ticket/5781
 	            .css({ top: 0, left: 0 })
 	            .hide()
-	            .data( "menu" );
+                .data( "ui-menu" );
 	        if ( $.fn.bgiframe ) {
 	             this.menu.element.bgiframe();
 	        }
