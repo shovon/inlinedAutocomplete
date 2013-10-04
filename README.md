@@ -1,3 +1,7 @@
+# Note:
+
+Use [jQuery Sew](https://github.com/shovon/inlinedAutocomplete/issues/8) instead.
+
 jQuery UI Inlined Autocomplete
 ====================
 
