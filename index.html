@@ -1,0 +1,44 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>UI Test</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="//shovon.github.com/inlinedAutocomplete/jquery-ui.inlinedAutocomplete.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+    <script src="//shovon.github.com/inlinedAutocomplete/jquery.caretpixelpos.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+  </head>
+
+  <body>
+    <div class="center-column">
+      <h2>textbox</h2>
+      <textarea class="text_area"
+                placeholder="Use the '@' symbol, and see suggestions..."
+                id="inputbox"></textarea>
+      <h2>contentEditable</h2>
+      <div id="editablecontainer">
+        <div
+          id="editable"
+          style="min-width: 20px"
+          contentEditable="true">
+          <p>
+              <b>jQuery</b> is a multi-browser <b>javascript</b> library.
+          </p>
+        </div>
+      </div>
+      <h2>IFrame</h2>
+      <div id="iframecontainer">
+        <iframe
+          id="myiframe"
+          style="width: 100%; height: 339px; display: block;"
+          src="iframe.html"></iframe>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="src/jquery-ui.inlinedAutocomplete.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>
